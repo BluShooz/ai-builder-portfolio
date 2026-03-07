@@ -817,66 +817,128 @@ img {
     animation: float-1 7s ease-in-out infinite reverse;
 }
 
-/* Enhanced Particle Effects */
-.particle {
+/* Enhanced Shooting Star Effects */
+.shooting-star {
     position: absolute;
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--neon), white);
+    border-radius: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+    animation: shooting-star-animate linear infinite;
+    box-shadow: 0 0 6px var(--neon), 0 0 12px rgba(0, 255, 65, 0.5);
+}
+
+.shooting-star::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
     width: 4px;
     height: 4px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 8px white, 0 0 16px var(--neon);
+}
+
+.shooting-star:nth-child(5) {
+    left: -5%; top: 10%;
+    animation-duration: 2s; animation-delay: 0s;
+    --angle: 25deg;
+}
+.shooting-star:nth-child(6) {
+    left: 105%; top: 30%;
+    animation-duration: 2.5s; animation-delay: -0.5s;
+    --angle: 30deg;
+}
+.shooting-star:nth-child(7) {
+    left: -5%; top: 50%;
+    animation-duration: 1.8s; animation-delay: -1s;
+    --angle: 20deg;
+}
+.shooting-star:nth-child(8) {
+    left: 105%; top: 70%;
+    animation-duration: 2.2s; animation-delay: -1.5s;
+    --angle: 35deg;
+}
+.shooting-star:nth-child(9) {
+    left: -5%; top: 85%;
+    animation-duration: 2.8s; animation-delay: -2s;
+    --angle: 28deg;
+}
+.shooting-star:nth-child(10) {
+    left: 105%; top: 20%;
+    animation-duration: 2.3s; animation-delay: -2.5s;
+    --angle: 22deg;
+}
+.shooting-star:nth-child(11) {
+    left: 20%; top: -5%;
+    animation-duration: 2.6s; animation-delay: -3s;
+    --angle: 70deg;
+}
+.shooting-star:nth-child(12) {
+    left: 70%; top: 105%;
+    animation-duration: 2.1s; animation-delay: -3.5s;
+    --angle: 60deg;
+}
+.shooting-star:nth-child(13) {
+    left: 30%; top: -5%;
+    animation-duration: 2.4s; animation-delay: -4s;
+    --angle: 65deg;
+}
+.shooting-star:nth-child(14) {
+    left: 80%; top: 105%;
+    animation-duration: 2.7s; animation-delay: -4.5s;
+    --angle: 75deg;
+}
+.shooting-star:nth-child(15) {
+    left: 40%; top: -5%;
+    animation-duration: 2.0s; animation-delay: -5s;
+    --angle: 55deg;
+}
+
+@keyframes shooting-star-animate {
+    0% {
+        opacity: 0;
+        transform: translate(0, 0) rotate(var(--angle, 45deg)) scaleX(0.5);
+    }
+    5% {
+        opacity: 1;
+        transform: translate(50px, 30px) rotate(var(--angle, 45deg)) scaleX(1);
+    }
+    80% {
+        opacity: 1;
+        transform: translate(calc(100vw + 200px), calc(100vh + 200px)) rotate(var(--angle, 45deg)) scaleX(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(calc(100vw + 300px), calc(100vh + 300px)) rotate(var(--angle, 45deg)) scaleX(0.3);
+    }
+}
+
+/* Grid particles - keep as subtle pulse */
+.grid-particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
     background: var(--neon);
     border-radius: 50%;
     pointer-events: none;
     z-index: 1;
-    opacity: 0.6;
-    animation: particle-float linear infinite;
-}
-
-.particle:nth-child(5) { left: 10%; top: 20%; animation-duration: 15s; animation-delay: 0s; }
-.particle:nth-child(6) { left: 25%; top: 60%; animation-duration: 20s; animation-delay: -2s; }
-.particle:nth-child(7) { left: 40%; top: 30%; animation-duration: 18s; animation-delay: -4s; }
-.particle:nth-child(8) { left: 60%; top: 70%; animation-duration: 22s; animation-delay: -6s; }
-.particle:nth-child(9) { left: 75%; top: 40%; animation-duration: 16s; animation-delay: -8s; }
-.particle:nth-child(10) { left: 85%; top: 55%; animation-duration: 19s; animation-delay: -10s; }
-.particle:nth-child(11) { left: 15%; top: 80%; animation-duration: 17s; animation-delay: -12s; }
-.particle:nth-child(12) { left: 50%; top: 15%; animation-duration: 21s; animation-delay: -14s; }
-.particle:nth-child(13) { left: 70%; top: 85%; animation-duration: 14s; animation-delay: -16s; }
-.particle:nth-child(14) { left: 30%; top: 45%; animation-duration: 23s; animation-delay: -18s; }
-.particle:nth-child(15) { left: 90%; top: 25%; animation-duration: 15s; animation-delay: -20s; }
-
-@keyframes particle-float {
-    0% {
-        transform: translate(0, 0) scale(1);
-        opacity: 0;
-    }
-    10% {
-        opacity: 0.8;
-    }
-    90% {
-        opacity: 0.8;
-    }
-    100% {
-        transform: translate(var(--tx, 100px), var(--ty, -100px)) scale(0.5);
-        opacity: 0;
-    }
-}
-
-/* Grid particles */
-.grid-particle {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background: var(--neon);
-    pointer-events: none;
-    z-index: 1;
     opacity: 0;
-    animation: grid-particle-pulse 3s ease-in-out infinite;
+    animation: grid-particle-pulse 2s ease-in-out infinite;
+    box-shadow: 0 0 6px var(--neon);
 }
 
 .grid-particle:nth-child(16) { left: 20%; top: 25%; animation-delay: 0s; }
-.grid-particle:nth-child(17) { left: 45%; top: 65%; animation-delay: 0.5s; }
-.grid-particle:nth-child(18) { left: 70%; top: 35%; animation-delay: 1s; }
-.grid-particle:nth-child(19) { left: 30%; top: 75%; animation-delay: 1.5s; }
-.grid-particle:nth-child(20) { left: 80%; top: 50%; animation-delay: 2s; }
-.grid-particle:nth-child(21) { left: 55%; top: 20%; animation-delay: 2.5s; }
+.grid-particle:nth-child(17) { left: 45%; top: 65%; animation-delay: 0.4s; }
+.grid-particle:nth-child(18) { left: 70%; top: 35%; animation-delay: 0.8s; }
+.grid-particle:nth-child(19) { left: 30%; top: 75%; animation-delay: 1.2s; }
+.grid-particle:nth-child(20) { left: 80%; top: 50%; animation-delay: 1.6s; }
+.grid-particle:nth-child(21) { left: 55%; top: 20%; animation-delay: 2s; }
 
 @keyframes grid-particle-pulse {
     0%, 100% {
@@ -885,8 +947,8 @@ img {
     }
     50% {
         opacity: 1;
-        transform: scale(1.5);
-        box-shadow: 0 0 10px var(--neon);
+        transform: scale(2);
+        box-shadow: 0 0 15px var(--neon), 0 0 30px rgba(0, 255, 65, 0.5);
     }
 }
 
