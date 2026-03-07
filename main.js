@@ -255,7 +255,7 @@ function generateResponse(input) {
 
     // Contact
     if (lower.includes('contact') || lower.includes('email') || lower.includes('hire') || lower.includes('work') || lower.includes('available')) {
-        return "Jonathan is <strong>available for full-time and contract roles</strong>! You can reach him at <strong>3lueshooz@gmail.com</strong>, connect on <strong>GitHub</strong>, or find him on <strong>LinkedIn</strong>. Check the Contact section for all links!";
+        return "Jonathan is <strong>available for full-time and contract roles</strong>! You can reach him at <strong>3lueshooz@gmail.com</strong> or connect on <strong>GitHub</strong>. Check the Contact section for all links!";
     }
 
     // Lab/Experiments
@@ -280,10 +280,9 @@ function generateResponse(input) {
 
 // Initial greeting message
 setTimeout(() => {
-    if (!chatWindow.classList.contains('active')) {
-        // Bot will greet when chat is opened
-    }
-}, 2000);
+    // Add initial greeting to show the chat is active
+    addMessage("👋 Hi! I'm the AI Builder assistant. Ask me about Jonathan's projects, demos, or skills!", 'bot');
+}, 1500);
 
 /* ─── SCROLL REVEALS ──────────────────────────────────────── */
 const revealEls = document.querySelectorAll('.reveal');
