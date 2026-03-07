@@ -115,7 +115,7 @@
                         <span class="tech-tag">REST API</span>
                     </div>
 
-                    <a href="#demo-automation" class="btn primary magnetic" style="margin-top:1rem;">
+                    <a href="#demo-risk-analyzer" class="btn primary magnetic" style="margin-top:1rem;">
                         <span>→ View Live Demo</span>
                     </a>
                 </div>
@@ -376,6 +376,45 @@
             </p>
 
             <div class="demos-grid">
+
+                <!-- Demo 0: AI Merchant Risk Analyzer -->
+                <div class="demo-card reveal" id="demo-risk-analyzer">
+                    <div class="demo-header">
+                        <div class="demo-dots">
+                            <div class="demo-dot"></div>
+                            <div class="demo-dot"></div>
+                            <div class="demo-dot"></div>
+                        </div>
+                        <span style="margin-left:0.5rem;">RISK_ANALYZER.exe</span>
+                    </div>
+                    <div class="demo-body">
+                        <label class="demo-input-label" for="risk-biz-name">Merchant Business Name:</label>
+                        <input type="text" id="risk-biz-name" class="demo-textarea" placeholder="e.g. TechStore Inc." style="height:40px;">
+
+                        <label class="demo-input-label" for="risk-biz-type">Business Type:</label>
+                        <select id="risk-biz-type" class="demo-textarea" style="height:40px;">
+                            <option value="retail">Retail / E-commerce</option>
+                            <option value="software">Software / SaaS</option>
+                            <option value="services">Professional Services</option>
+                            <option value="financial">Financial Services</option>
+                            <option value="high-risk">High-Risk Industry</option>
+                        </select>
+
+                        <label class="demo-input-label" for="risk-tx-volume">Monthly Transaction Volume ($):</label>
+                        <input type="text" id="risk-tx-volume" class="demo-textarea" placeholder="e.g. 50000" style="height:40px;">
+
+                        <label class="demo-input-label" for="risk-tx-count">Monthly Transaction Count:</label>
+                        <input type="text" id="risk-tx-count" class="demo-textarea" placeholder="e.g. 500" style="height:40px;">
+
+                        <button class="btn primary magnetic" id="risk-btn"
+                            style="margin-top:0.75rem;width:100%;justify-content:center;" onclick="runRiskAnalyzerDemo()">
+                            <span>⚡ Analyze Risk</span>
+                        </button>
+                        <div class="demo-output" id="risk-output" aria-live="polite">
+                            <span style="opacity:0.3;font-size:0.75rem;">// Risk analysis results will appear here...</span>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- Demo 1: Automation Generator -->
                 <div class="demo-card reveal" id="demo-automation">

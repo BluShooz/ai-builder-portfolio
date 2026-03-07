@@ -523,6 +523,157 @@ async function runLandingPageDemo() {
     btn.disabled = false;
 }
 
+/* ─── LIVE DEMO: AI MERCHANT RISK ANALYZER ─────────────────── */
+async function runRiskAnalyzerDemo() {
+    const bizName = document.getElementById('risk-biz-name').value.trim();
+    const bizType = document.getElementById('risk-biz-type').value;
+    const txVolume = document.getElementById('risk-tx-volume').value.trim();
+    const txCount = document.getElementById('risk-tx-count').value.trim();
+    const output = document.getElementById('risk-output');
+    const btn = document.getElementById('risk-btn');
+
+    if (!bizName || !txVolume || !txCount) {
+        output.innerHTML = '<span style="color:#FF4444;">// Please fill in all merchant data fields.</span>';
+        return;
+    }
+
+    btn.disabled = true;
+    output.innerHTML = '<span class="thinking">// AI Risk Analyzer is processing merchant data... ⚡</span>';
+
+    await sleep(1500);
+
+    // Calculate risk scores based on inputs
+    const volume = parseInt(txVolume.replace(/[^0-9]/g, '')) || 0;
+    const count = parseInt(txCount.replace(/[^0-9]/g, '')) || 0;
+    const avgTicket = count > 0 ? volume / count : 0;
+
+    // Base risk by business type
+    const typeRisk = {
+        'retail': 25,
+        'software': 15,
+        'services': 20,
+        'financial': 45,
+        'high-risk': 75
+    };
+
+    // Calculate risk factors
+    let chargebackRisk = typeRisk[bizType] || 30;
+    let fraudRisk = Math.min(60, typeRisk[bizType] + 10);
+    let velocityRisk = count > 1000 ? 75 : count > 500 ? 55 : count > 100 ? 35 : 20;
+    let patternRisk = avgTicket > 500 ? 50 : avgTicket > 100 ? 25 : 15;
+
+    // Add some randomness for realism
+    chargebackRisk += Math.floor(Math.random() * 15) - 7;
+    fraudRisk += Math.floor(Math.random() * 10) - 5;
+    velocityRisk += Math.floor(Math.random() * 12) - 6;
+    patternRisk += Math.floor(Math.random() * 10) - 5;
+
+    // Ensure values are in valid range
+    chargebackRisk = Math.max(5, Math.min(95, chargebackRisk));
+    fraudRisk = Math.max(5, Math.min(95, fraudRisk));
+    velocityRisk = Math.max(5, Math.min(95, velocityRisk));
+    patternRisk = Math.max(5, Math.min(95, patternRisk));
+
+    // Calculate overall risk score
+    const overallRisk = Math.round((chargebackRisk * 0.3 + fraudRisk * 0.3 + velocityRisk * 0.2 + patternRisk * 0.2));
+
+    // Determine risk level and recommendation
+    let riskLevel, riskColor, recommendation;
+    if (overallRisk >= 70) {
+        riskLevel = 'CRITICAL';
+        riskColor = '#FF4444';
+        recommendation = 'DENY — Risk exceeds acceptable thresholds. Manual review required.';
+    } else if (overallRisk >= 50) {
+        riskLevel = 'HIGH';
+        riskColor = '#FF8800';
+        recommendation = 'CONDITIONAL — Approve with enhanced monitoring and reserve requirements.';
+    } else if (overallRisk >= 30) {
+        riskLevel = 'MODERATE';
+        riskColor = '#FFCC00';
+        recommendation = 'APPROVE — Standard monitoring and review cycle.';
+    } else {
+        riskLevel = 'LOW';
+        riskColor = '#00FF41';
+        recommendation = 'APPROVE — Expedited processing with standard due diligence.';
+    }
+
+    const sections = [
+        {
+            label: '📊 MERCHANT PROFILE',
+            lines: [
+                `Business Name: ${bizName}`,
+                `Business Type: ${bizType.charAt(0).toUpperCase() + bizType.slice(1)}`,
+                `Monthly Volume: $${volume.toLocaleString()}`,
+                `Monthly Transactions: ${count.toLocaleString()}`,
+                `Average Ticket Size: $${avgTicket.toFixed(2)}`,
+            ]
+        },
+        {
+            label: '⚠️ RISK FACTOR ANALYSIS',
+            lines: [
+                `Chargeback Probability: ${chargebackRisk}% ${chargebackRisk > 50 ? '🔴' : chargebackRisk > 30 ? '🟡' : '🟢'}`,
+                `Fraud Signal Score: ${fraudRisk}% ${fraudRisk > 50 ? '🔴' : fraudRisk > 30 ? '🟡' : '🟢'}`,
+                `Transaction Velocity: ${velocityRisk}% ${velocityRisk > 50 ? '🔴' : velocityRisk > 30 ? '🟡' : '🟢'}`,
+                `Pattern Deviation: ${patternRisk}% ${patternRisk > 50 ? '🔴' : patternRisk > 30 ? '🟡' : '🟢'}`,
+            ]
+        },
+        {
+            label: '📈 RISK SCORE CALCULATION',
+            lines: [
+                `Overall Risk Score: ${overallRisk}/100`,
+                `Risk Level: ${riskLevel}`,
+                `Confidence: 94% (based on 2.3M historical data points)`,
+                `Analysis completed: ${new Date().toLocaleString()}`,
+            ]
+        },
+        {
+            label: '✅ APPROVAL RECOMMENDATION',
+            lines: [
+                recommendation,
+                `Next review: ${overallRisk >= 50 ? '30 days' : '90 days'}`,
+                `Monitoring level: ${overallRisk >= 50 ? 'Enhanced' : 'Standard'}`,
+                `Reserve requirement: ${overallRisk >= 70 ? '15%' : overallRisk >= 50 ? '10%' : '5%'}`,
+            ]
+        },
+        {
+            label: '🔍 DETAILED FINDINGS',
+            lines: [
+                `• ${chargebackRisk > 40 ? 'Elevated' : 'Normal'} chargeback risk for ${bizType} category`,
+                `• ${fraudRisk > 40 ? 'Additional' : 'Standard'} verification recommended`,
+                `• ${velocityRisk > 50 ? 'High transaction frequency detected' : 'Transaction volume within normal range'}`,
+                `• ${patternRisk > 40 ? 'Unusual' : 'Consistent'} transaction patterns observed`,
+            ]
+        },
+    ];
+
+    output.innerHTML = `<div style="color:${riskColor};font-size:0.7rem;letter-spacing:0.2em;margin-bottom:0.75rem;opacity:0.9;">RISK ANALYSIS → ${bizName.toUpperCase()}</div>`;
+
+    for (const section of sections) {
+        await sleep(350);
+        const header = document.createElement('div');
+        header.style.cssText = 'color:var(--neon);font-weight:700;margin-top:0.75rem;font-size:0.75rem;animation:line-appear 0.3s ease forwards;';
+        header.textContent = section.label;
+        output.appendChild(header);
+
+        for (const line of section.lines) {
+            await sleep(120);
+            const el = document.createElement('div');
+            el.classList.add('output-line');
+            el.innerHTML = `<span class="arrow">·</span><span style="color:rgba(255,255,255,0.75);">${line}</span>`;
+            output.appendChild(el);
+            output.scrollTop = output.scrollHeight;
+        }
+    }
+
+    await sleep(400);
+    const done = document.createElement('div');
+    done.style.cssText = `margin-top:0.75rem;color:${riskColor};font-size:0.7rem;opacity:0.8;font-weight:700;`;
+    done.textContent = `// ANALYSIS COMPLETE: ${riskLevel} RISK — ${recommendation.split('—')[0]}`;
+    output.appendChild(done);
+
+    btn.disabled = false;
+}
+
 /* ─── LIVE DEMO: AI RESEARCH AGENT ───────────────────────── */
 async function runResearchDemo() {
     const input = document.getElementById('research-input').value.trim();
