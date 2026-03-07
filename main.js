@@ -11,6 +11,14 @@ const cursorTrail = document.getElementById('cursor-trail');
 let mouseX = 0, mouseY = 0;
 let cursorX = 0, cursorY = 0;
 
+// Set initial cursor position at center of screen
+const initialX = window.innerWidth / 2;
+const initialY = window.innerHeight / 2;
+cursor.style.left = (initialX - 10) + 'px';
+cursor.style.top = (initialY - 10) + 'px';
+cursorTrail.style.left = (initialX - 4) + 'px';
+cursorTrail.style.top = (initialY - 4) + 'px';
+
 document.addEventListener('mousemove', e => {
     mouseX = e.clientX;
     mouseY = e.clientY;
