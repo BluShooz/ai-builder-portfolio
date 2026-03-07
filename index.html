@@ -115,7 +115,7 @@
                         <span class="tech-tag">REST API</span>
                     </div>
 
-                    <a href="#demos" class="btn primary magnetic" style="margin-top:1rem;">
+                    <a href="#demo-automation" class="btn primary magnetic" style="margin-top:1rem;">
                         <span>→ View Live Demo</span>
                     </a>
                 </div>
@@ -263,29 +263,102 @@
             </div>
 
             <div class="lab-grid reveal">
-                <article class="lab-card" data-index="01">
+                <article class="lab-card magnetic" onclick="openLabDemo('prompt-lab')">
                     <span class="lab-icon" aria-hidden="true">⚗️</span>
                     <h3 class="lab-title">AI Prompt Laboratory</h3>
                     <p class="lab-desc">Experiment with prompt engineering techniques. Test chain-of-thought, few-shot,
                         zero-shot, and structured output patterns against multiple LLM backends.</p>
                     <span class="lab-status">Active Experiment</span>
+                    <span class="lab-action">→ Try Now</span>
                 </article>
 
-                <article class="lab-card" data-index="02">
+                <article class="lab-card magnetic" onclick="openLabDemo('chain-builder')">
                     <span class="lab-icon" aria-hidden="true">🔗</span>
                     <h3 class="lab-title">Automation Chain Builder</h3>
                     <p class="lab-desc">Visualize automation pipelines and task flows. Drag-and-drop interface for
                         mapping multi-step AI agent chains with conditional logic and error handling.</p>
                     <span class="lab-status">In Development</span>
+                    <span class="lab-action">→ Try Now</span>
                 </article>
 
-                <article class="lab-card" data-index="03">
+                <article class="lab-card magnetic" onclick="openLabDemo('idea-generator')">
                     <span class="lab-icon" aria-hidden="true">💡</span>
                     <h3 class="lab-title">AI Idea Generator</h3>
                     <p class="lab-desc">Generates startup ideas and product concepts from market gaps. Combines trend
                         data, competitor analysis, and ICP profiling to surface high-signal opportunities.</p>
                     <span class="lab-status">Prototyping</span>
+                    <span class="lab-action">→ Try Now</span>
                 </article>
+            </div>
+
+            <!-- Lab Demo Modals -->
+            <div id="lab-demo-modals">
+                <!-- Prompt Lab Modal -->
+                <div class="lab-modal" id="modal-prompt-lab">
+                    <div class="lab-modal-content">
+                        <div class="lab-modal-header">
+                            <span>⚗️ AI Prompt Laboratory</span>
+                            <button class="lab-close" onclick="closeLabDemo('prompt-lab')">×</button>
+                        </div>
+                        <div class="lab-modal-body">
+                            <label class="demo-input-label">Enter your prompt to test:</label>
+                            <textarea id="prompt-lab-input" class="demo-textarea" placeholder="e.g. Write a Python function to calculate fibonacci numbers" style="height:100px;"></textarea>
+                            <div class="prompt-techniques">
+                                <span class="technique-label">Techniques:</span>
+                                <label><input type="checkbox" value="cot"> Chain-of-Thought</label>
+                                <label><input type="checkbox" value="fewshot"> Few-Shot</label>
+                                <label><input type="checkbox" value="zeroshot"> Zero-Shot</label>
+                                <label><input type="checkbox" value="structured"> Structured Output</label>
+                            </div>
+                            <button class="btn primary magnetic" onclick="runPromptLab()" style="margin-top:0.75rem;width:100%;">
+                                <span>⚗️ Test Prompt</span>
+                            </button>
+                            <div class="demo-output" id="prompt-lab-output" aria-live="polite">
+                                <span style="opacity:0.3;font-size:0.75rem;">// Prompt analysis results will appear here...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chain Builder Modal -->
+                <div class="lab-modal" id="modal-chain-builder">
+                    <div class="lab-modal-content">
+                        <div class="lab-modal-header">
+                            <span>🔗 Automation Chain Builder</span>
+                            <button class="lab-close" onclick="closeLabDemo('chain-builder')">×</button>
+                        </div>
+                        <div class="lab-modal-body">
+                            <label class="demo-input-label">Describe your automation goal:</label>
+                            <textarea id="chain-builder-input" class="demo-textarea" placeholder="e.g. Automatically process customer support emails and route to departments"></textarea>
+                            <button class="btn primary magnetic" onclick="runChainBuilder()" style="margin-top:0.75rem;width:100%;">
+                                <span>🔗 Build Chain</span>
+                            </button>
+                            <div class="demo-output" id="chain-builder-output" aria-live="polite">
+                                <span style="opacity:0.3;font-size:0.75rem;">// Chain visualization will appear here...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Idea Generator Modal -->
+                <div class="lab-modal" id="modal-idea-generator">
+                    <div class="lab-modal-content">
+                        <div class="lab-modal-header">
+                            <span>💡 AI Idea Generator</span>
+                            <button class="lab-close" onclick="closeLabDemo('idea-generator')">×</button>
+                        </div>
+                        <div class="lab-modal-body">
+                            <label class="demo-input-label">Enter industry or interest area:</label>
+                            <textarea id="idea-generator-input" class="demo-textarea" placeholder="e.g. FinTech, Healthcare, E-commerce, Education"></textarea>
+                            <button class="btn primary magnetic" onclick="runIdeaGenerator()" style="margin-top:0.75rem;width:100%;">
+                                <span>💡 Generate Ideas</span>
+                            </button>
+                            <div class="demo-output" id="idea-generator-output" aria-live="polite">
+                                <span style="opacity:0.3;font-size:0.75rem;">// Startup ideas will appear here...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -305,7 +378,7 @@
             <div class="demos-grid">
 
                 <!-- Demo 1: Automation Generator -->
-                <div class="demo-card reveal">
+                <div class="demo-card reveal" id="demo-automation">
                     <div class="demo-header">
                         <div class="demo-dots">
                             <div class="demo-dot"></div>

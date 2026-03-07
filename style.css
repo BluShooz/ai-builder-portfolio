@@ -1702,3 +1702,123 @@ footer {
         font-size: clamp(2.5rem, 12vw, 4rem);
     }
 }
+/* Lab action button */
+.lab-action {
+    display: block;
+    margin-top: 1rem;
+    font-size: 0.7rem;
+    color: var(--neon);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.lab-card {
+    cursor: pointer;
+}
+
+.lab-card:hover .lab-action {
+    animation: pulse-action 1s ease-in-out infinite;
+}
+
+@keyframes pulse-action {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.6;
+    }
+}
+
+/* Lab Modal Styles */
+.lab-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.lab-modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.lab-modal-content {
+    background: var(--black);
+    border: 2px solid var(--neon);
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.lab-modal-header {
+    background: var(--neon);
+    color: var(--black);
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    font-family: var(--font-mono);
+}
+
+.lab-close {
+    background: none;
+    border: none;
+    color: var(--black);
+    font-size: 1.5rem;
+    cursor: none;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.lab-close:hover {
+    transform: rotate(90deg);
+}
+
+.lab-modal-body {
+    padding: 1.5rem;
+}
+
+.prompt-techniques {
+    margin: 1rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.technique-label {
+    font-size: 0.65rem;
+    color: var(--neon);
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-right: 0.5rem;
+}
+
+.prompt-techniques label {
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    cursor: pointer;
+    font-family: var(--font-mono);
+}
+
+.prompt-techniques input[type="checkbox"] {
+    accent-color: var(--neon);
+}

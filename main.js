@@ -796,6 +796,206 @@ document.querySelectorAll('.lab-card').forEach((card, i) => {
     card.style.transitionDelay = `${i * 0.1}s`;
 });
 
+/* ─── LAB EXPERIMENTS ───────────────────────────────────── */
+function openLabDemo(type) {
+    const modal = document.getElementById(`modal-${type}`);
+    if (modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeLabDemo(type) {
+    const modal = document.getElementById(`modal-${type}`);
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+
+// Close modal on outside click
+document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('lab-modal')) {
+        e.target.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+});
+
+/* ─── LAB DEMO 1: AI PROMPT LABORATORY ─────────────────── */
+async function runPromptLab() {
+    const input = document.getElementById('prompt-lab-input').value.trim();
+    const output = document.getElementById('prompt-lab-output');
+    if (!input) { output.innerHTML = '<span style="color:#FF4444;">// Please enter a prompt to test.</span>'; return; }
+
+    output.innerHTML = '<span class="thinking">// AI Prompt Laboratory is analyzing your prompt... ⚗️</span>';
+
+    await sleep(1000);
+
+    const techniques = [];
+    document.querySelectorAll('.prompt-techniques input:checked').forEach(cb => {
+        techniques.push(cb.value);
+    });
+
+    const analysis = [
+        {
+            label: '📊 PROMPT ANALYSIS',
+            lines: [
+                `Original prompt: "${input.substring(0, 60)}${input.length > 60 ? '...' : ''}"`,
+                `Token count estimate: ~${Math.ceil(input.length / 4)} tokens`,
+                `Complexity level: ${input.length > 200 ? 'High' : input.length > 100 ? 'Medium' : 'Low'}`,
+                `Clarity score: ${input.split('.').length > 3 ? '8.2/10' : '9.5/10'}`,
+            ]
+        },
+        {
+            label: '🔧 OPTIMIZATION SUGGESTIONS',
+            lines: [
+                `• Add specific context and constraints for better results`,
+                `• Include output format examples (JSON, CSV, etc.)`,
+                `• Specify tone and voice for consistent responses`,
+                `• Break complex tasks into step-by-step instructions`,
+            ]
+        },
+    ];
+
+    if (techniques.length > 0) {
+        analysis.push({
+            label: '⚙️ SELECTED TECHNIQUES',
+            lines: techniques.map(t => `• ${t.toUpperCase()}: Applied to prompt optimization`)
+        });
+    }
+
+    output.innerHTML = `<div style="color:var(--neon);font-size:0.7rem;letter-spacing:0.2em;margin-bottom:0.75rem;opacity:0.7;">PROMPT ANALYSIS → COMPLETE</div>`;
+
+    for (const section of analysis) {
+        await sleep(300);
+        const header = document.createElement('div');
+        header.style.cssText = 'color:var(--neon);font-weight:700;margin-top:0.75rem;font-size:0.75rem;animation:line-appear 0.3s ease forwards;';
+        header.textContent = section.label;
+        output.appendChild(header);
+
+        for (const line of section.lines) {
+            await sleep(100);
+            const el = document.createElement('div');
+            el.classList.add('output-line');
+            el.innerHTML = `<span class="arrow">·</span><span style="color:rgba(255,255,255,0.75);">${line}</span>`;
+            output.appendChild(el);
+            output.scrollTop = output.scrollHeight;
+        }
+    }
+
+    await sleep(300);
+    const done = document.createElement('div');
+    done.style.cssText = 'margin-top:0.75rem;color:var(--neon);font-size:0.7rem;opacity:0.6;';
+    done.textContent = '// Prompt analysis complete. Ready for testing.';
+    output.appendChild(done);
+}
+
+/* ─── LAB DEMO 2: AUTOMATION CHAIN BUILDER ─────────────── */
+async function runChainBuilder() {
+    const input = document.getElementById('chain-builder-input').value.trim();
+    const output = document.getElementById('chain-builder-output');
+    if (!input) { output.innerHTML = '<span style="color:#FF4444;">// Please describe your automation goal.</span>'; return; }
+
+    output.innerHTML = '<span class="thinking">// AI Chain Builder is visualizing your automation... 🔗</span>';
+
+    await sleep(1200);
+
+    const steps = [
+        { trigger: 'Webhook / API Call', action: 'Receive data or event trigger', condition: 'When new data arrives' },
+        { trigger: 'Data Validation', action: 'Validate and sanitize input data', condition: 'If data format matches expected schema' },
+        { trigger: 'AI Processing', action: 'LLM analyzes and categorizes data', condition: 'Route based on content type' },
+        { trigger: 'Decision Gate', action: 'Conditional routing logic', condition: 'If priority > threshold, escalate' },
+        { trigger: 'Action Execution', action: 'Execute downstream tasks or API calls', condition: 'Parallel processing enabled' },
+        { trigger: 'Response Handler', action: 'Format and send response', condition: 'Always execute' },
+        { trigger: 'Logging & Monitoring', action: 'Log execution and metrics', condition: 'Track performance and errors' },
+    ];
+
+    output.innerHTML = `<div style="color:var(--neon);font-size:0.7rem;letter-spacing:0.2em;margin-bottom:0.75rem;opacity:0.7;">CHAIN VISUALIZATION → ${input.toUpperCase()}</div>`;
+
+    for (let i = 0; i < steps.length; i++) {
+        await sleep(350);
+        const step = steps[i];
+        const el = document.createElement('div');
+        el.style.cssText = 'display:flex;gap:0.5rem;margin-bottom:0.5rem;animation:line-appear 0.3s ease forwards;';
+        el.innerHTML = `
+            <span style="color:var(--neon);font-size:0.7rem;flex-shrink:0;">${i + 1}</span>
+            <div style="flex:1;">
+                <div style="color:var(--neon);font-size:0.65rem;">${step.trigger}</div>
+                <div style="font-size:0.75rem;">${step.action}</div>
+                <div style="font-size:0.65rem;opacity:0.5;">${step.condition}</div>
+            </div>
+        `;
+        output.appendChild(el);
+        output.scrollTop = output.scrollHeight;
+    }
+
+    await sleep(300);
+    const done = document.createElement('div');
+    done.style.cssText = 'margin-top:0.75rem;color:var(--neon);font-size:0.7rem;opacity:0.6;';
+    done.textContent = '// Automation chain built with 7 nodes and 4 decision points.';
+    output.appendChild(done);
+}
+
+/* ─── LAB DEMO 3: AI IDEA GENERATOR ─────────────────────── */
+async function runIdeaGenerator() {
+    const input = document.getElementById('idea-generator-input').value.trim();
+    const output = document.getElementById('idea-generator-output');
+    if (!input) { output.innerHTML = '<span style="color:#FF4444;">// Please enter an industry or area.</span>'; return; }
+
+    output.innerHTML = '<span class="thinking">// AI Idea Generator is analyzing market trends... 💡</span>';
+
+    await sleep(1000);
+
+    const industry = capitalize(input);
+    const ideas = [
+        {
+            name: `${industry} Intelligence Platform`,
+            tagline: `Real-time insights for ${input.toLowerCase()} decision-makers`,
+            problem: `Industry leaders lack actionable data for strategic planning`,
+            solution: `AI-powered analytics dashboard with predictive modeling`,
+            market: `TAM: $12.8B | CAGR: 24% | Competition: Low-Medium`,
+        },
+        {
+            name: `${industry} Workflow Automation`,
+            tagline: `Streamline operations in ${input.toLowerCase()} with AI`,
+            problem: `Manual processes cause delays and errors in critical workflows`,
+            solution: `End-to-end automation with intelligent error handling`,
+            market: `TAM: $8.2B | CAGR: 31% | Competition: Medium`,
+        },
+        {
+            name: `${industry} Compliance Assistant`,
+            tagline: `Automated regulatory compliance for ${input.toLowerCase()}`,
+            problem: `Complex regulations create risk and overhead for businesses`,
+            solution: `AI-driven compliance monitoring and reporting`,
+            market: `TAM: $5.4B | CAGR: 19% | Competition: Low`,
+        },
+    ];
+
+    output.innerHTML = `<div style="color:var(--neon);font-size:0.7rem;letter-spacing:0.2em;margin-bottom:0.75rem;opacity:0.7;">STARTUP IDEAS → ${industry.toUpperCase()}</div>`;
+
+    for (let i = 0; i <ideas.length; i++) {
+        await sleep(400);
+        const idea = ideas[i];
+        const card = document.createElement('div');
+        card.style.cssText = 'background:rgba(0,255,65,0.05);border:1px solid rgba(0,255,65,0.2);padding:1rem;margin-bottom:0.75rem;animation:line-appear 0.3s ease forwards;';
+        card.innerHTML = `
+            <div style="color:var(--neon);font-weight:700;margin-bottom:0.5rem;font-size:0.85rem;">${idea.name}</div>
+            <div style="font-size:0.75rem;margin-bottom:0.5rem;color:rgba(255,255,255,0.6);">${idea.tagline}</div>
+            <div style="margin:0.5rem 0;font-size:0.7rem;"><strong>Problem:</strong> ${idea.problem}</div>
+            <div style="margin:0.5rem 0;font-size:0.7rem;"><strong>Solution:</strong> ${idea.solution}</div>
+            <div style="font-size:0.65rem;color:var(--neon);margin-top:0.5rem;">${idea.market}</div>
+        `;
+        output.appendChild(card);
+        output.scrollTop = output.scrollHeight;
+    }
+
+    await sleep(300);
+    const done = document.createElement('div');
+    done.style.cssText = 'margin-top:0.75rem;color:var(--neon);font-size:0.7rem;opacity:0.6;';
+    done.textContent = '// 3 startup ideas generated with market analysis.';
+    output.appendChild(done);
+}
+
 /* ─── CONSOLE EASTER EGG ──────────────────────────────────── */
 console.log(
     '%c⚡ Jonathan Smith — AI Automation Builder\n%c// I build systems that eliminate manual work.\n// Available for full-time and contract roles.\n//\n// Email: 3lueshooz@gmail.com\n// GitHub: github.com',
