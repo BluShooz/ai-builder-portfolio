@@ -103,6 +103,7 @@ img {
     z-index: 9998;
     mix-blend-mode: difference;
     transition: transform 0.15s var(--ease-out), width 0.2s var(--ease-out), height 0.2s var(--ease-out);
+    display: block;
 }
 
 #cursor.expand {
@@ -122,6 +123,7 @@ img {
     z-index: 9997;
     opacity: 0.5;
     transition: left 0.25s ease, top 0.25s ease;
+    display: block;
 }
 
 /* ─── CONTAINER ───────────────────────────────────────────── */
