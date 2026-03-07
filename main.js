@@ -1188,7 +1188,7 @@ const SoundEffects = {
             case 'hover':
                 oscillator.frequency.setValueAtTime(400, this.ctx.currentTime);
                 oscillator.frequency.exponentialRampToValueAtTime(600, this.ctx.currentTime + 0.1);
-                gainNode.gain.setValueAtTime(0.05, this.ctx.currentTime);
+                gainNode.gain.setValueAtTime(0.15, this.ctx.currentTime);
                 gainNode.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.1);
                 oscillator.start(this.ctx.currentTime);
                 oscillator.stop(this.ctx.currentTime + 0.1);
@@ -1196,14 +1196,14 @@ const SoundEffects = {
             case 'click':
                 oscillator.frequency.setValueAtTime(800, this.ctx.currentTime);
                 oscillator.frequency.exponentialRampToValueAtTime(400, this.ctx.currentTime + 0.15);
-                gainNode.gain.setValueAtTime(0.1, this.ctx.currentTime);
+                gainNode.gain.setValueAtTime(0.2, this.ctx.currentTime);
                 gainNode.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.15);
                 oscillator.start(this.ctx.currentTime);
                 oscillator.stop(this.ctx.currentTime + 0.15);
                 break;
             case 'typing':
                 oscillator.frequency.setValueAtTime(800 + Math.random() * 200, this.ctx.currentTime);
-                gainNode.gain.setValueAtTime(0.02, this.ctx.currentTime);
+                gainNode.gain.setValueAtTime(0.05, this.ctx.currentTime);
                 gainNode.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.03);
                 oscillator.start(this.ctx.currentTime);
                 oscillator.stop(this.ctx.currentTime + 0.03);
@@ -1224,14 +1224,18 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('mousemove', initAudio, { once: true });
 
     // Add hover sounds to buttons and links
-    document.querySelectorAll('.btn, .magnetic, a, .lab-card, .project-card').forEach(el => {
+    const hoverElements = document.querySelectorAll('.btn, .magnetic, a, .lab-card, .project-card, .demo-card');
+    hoverElements.forEach(el => {
         el.addEventListener('mouseenter', () => SoundEffects.play('hover'));
     });
+    console.log(`🔊 Added hover sounds to ${hoverElements.length} elements`);
 
     // Add click sounds to buttons
-    document.querySelectorAll('.btn, .sound-effect').forEach(el => {
+    const clickElements = document.querySelectorAll('.btn, .sound-effect');
+    clickElements.forEach(el => {
         el.addEventListener('click', () => SoundEffects.play('click'));
     });
+    console.log(`🔊 Added click sounds to ${clickElements.length} elements`);
 });
 
 /* ─── TYPING EFFECT FOR SECTION HEADINGS ───────────────────── */
