@@ -221,9 +221,8 @@
                         <span class="tech-tag">Web Scraping</span>
                         <span class="tech-tag">RAG</span>
                     </div>
-                    <a href="https://github.com/BluShooz" target="_blank" rel="noopener" class="btn"
-                        style="font-size:0.7rem;padding:0.6rem 1.25rem;">
-                        <span>GitHub ↗</span>
+                    <a href="#demos" class="btn" style="font-size:0.7rem;padding:0.6rem 1.25rem;">
+                        <span>View Demo →</span>
                     </a>
                 </article>
 
@@ -238,9 +237,8 @@
                         <span class="tech-tag">SEO</span>
                         <span class="tech-tag">CMS Integration</span>
                     </div>
-                    <a href="https://github.com/BluShooz" target="_blank" rel="noopener" class="btn"
-                        style="font-size:0.7rem;padding:0.6rem 1.25rem;">
-                        <span>GitHub ↗</span>
+                    <a href="#demos" class="btn" style="font-size:0.7rem;padding:0.6rem 1.25rem;">
+                        <span>View Demo →</span>
                     </a>
                 </article>
 
@@ -353,6 +351,55 @@
                             <span>🚀 Generate Page Structure</span>
                         </button>
                         <div class="demo-output" id="page-output" aria-live="polite">
+                            <span style="opacity:0.3;font-size:0.75rem;">// Output appears here...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Demo 3: AI Research Agent -->
+                <div class="demo-card reveal">
+                    <div class="demo-header">
+                        <div class="demo-dots">
+                            <div class="demo-dot"></div>
+                            <div class="demo-dot"></div>
+                            <div class="demo-dot"></div>
+                        </div>
+                        <span style="margin-left:0.5rem;">RESEARCH_AGENT.exe</span>
+                    </div>
+                    <div class="demo-body">
+                        <label class="demo-input-label" for="research-input">Enter a research topic:</label>
+                        <textarea id="research-input" class="demo-textarea"
+                            placeholder="e.g. Impact of AI on healthcare industry"
+                            aria-label="Research topic for AI Research Agent"></textarea>
+                        <button class="btn primary magnetic" id="research-btn"
+                            style="margin-top:0.75rem;width:100%;justify-content:center;" onclick="runResearchDemo()">
+                            <span>🔍 Generate Research Report</span>
+                        </button>
+                        <div class="demo-output" id="research-output" aria-live="polite">
+                            <span style="opacity:0.3;font-size:0.75rem;">// Output appears here...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Demo 4: AI Content Engine -->
+                <div class="demo-card reveal">
+                    <div class="demo-header">
+                        <div class="demo-dots">
+                            <div class="demo-dot"></div>
+                            <div class="demo-dot"></div>
+                            <div class="demo-dot"></div>
+                        </div>
+                        <span style="margin-left:0.5rem;">CONTENT_ENGINE.exe</span>
+                    </div>
+                    <div class="demo-body">
+                        <label class="demo-input-label" for="content-input">Enter article topic and keywords:</label>
+                        <textarea id="content-input" class="demo-textarea" placeholder="e.g. Machine learning in healthcare"
+                            aria-label="Content topic for AI Content Engine"></textarea>
+                        <button class="btn primary magnetic" id="content-btn"
+                            style="margin-top:0.75rem;width:100%;justify-content:center;" onclick="runContentDemo()">
+                            <span>📝 Generate Content Structure</span>
+                        </button>
+                        <div class="demo-output" id="content-output" aria-live="polite">
                             <span style="opacity:0.3;font-size:0.75rem;">// Output appears here...</span>
                         </div>
                     </div>

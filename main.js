@@ -523,6 +523,196 @@ async function runLandingPageDemo() {
     btn.disabled = false;
 }
 
+/* ─── LIVE DEMO: AI RESEARCH AGENT ───────────────────────── */
+async function runResearchDemo() {
+    const input = document.getElementById('research-input').value.trim();
+    const output = document.getElementById('research-output');
+    const btn = document.getElementById('research-btn');
+    if (!input) { output.innerHTML = '<span style="color:#FF4444;">// Please enter a research topic.</span>'; return; }
+
+    btn.disabled = true;
+    output.innerHTML = '<span class="thinking">// AI Research Agent is gathering data from multiple sources... 🔍</span>';
+
+    await sleep(1200);
+
+    const topic = capitalize(input);
+    const sections = [
+        {
+            label: '📚 RESEARCH SUMMARY',
+            lines: [
+                `Topic: ${topic}`,
+                `Sources analyzed: 147+ academic papers, industry reports, and news articles`,
+                `Confidence level: 94% based on source reliability`,
+                `Last updated: ${new Date().toLocaleDateString()}`,
+            ]
+        },
+        {
+            label: '🔑 KEY FINDINGS',
+            lines: [
+                `• Primary trend: Growing adoption of ${topic.toLowerCase()} across industries`,
+                `• Market impact: Projected 340% growth in enterprise adoption by 2028`,
+                `• Key challenges: Integration complexity and skill gaps in workforce`,
+                `• Opportunity areas: Automation, real-time analytics, and user experience`,
+            ]
+        },
+        {
+            label: '📊 MARKET INSIGHTS',
+            lines: [
+                `Current market size: $45.2B globally`,
+                `CAGR: 28.5% (2024-2030)`,
+                `Top regions: North America (42%), Asia-Pacific (35%), Europe (18%)`,
+                `Leading companies: Tech giants, specialized startups, research institutions`,
+            ]
+        },
+        {
+            label: '🔗 RECOMMENDED RESOURCES',
+            lines: [
+                `MIT Technology Review - "${topic} in Practice" (2024)`,
+                `Nature Journal - "Advances in ${topic}" (Peer-reviewed)`,
+                `Industry Report: "${topic} Market Analysis" - McKinsey & Co.`,
+                `GitHub: 12,000+ repositories related to ${topic.toLowerCase()}`,
+            ]
+        },
+    ];
+
+    output.innerHTML = `<div style="color:var(--neon);font-size:0.7rem;letter-spacing:0.2em;margin-bottom:0.75rem;opacity:0.7;">RESEARCH REPORT → ${topic.toUpperCase()}</div>`;
+
+    for (const section of sections) {
+        await sleep(300);
+        const header = document.createElement('div');
+        header.style.cssText = 'color:var(--neon);font-weight:700;margin-top:0.75rem;font-size:0.75rem;animation:line-appear 0.3s ease forwards;';
+        header.textContent = section.label;
+        output.appendChild(header);
+
+        for (const line of section.lines) {
+            await sleep(120);
+            const el = document.createElement('div');
+            el.classList.add('output-line');
+            el.innerHTML = `<span class="arrow">·</span><span style="color:rgba(255,255,255,0.75);">${line}</span>`;
+            output.appendChild(el);
+            output.scrollTop = output.scrollHeight;
+        }
+    }
+
+    await sleep(300);
+    const done = document.createElement('div');
+    done.style.cssText = 'margin-top:0.75rem;color:var(--neon);font-size:0.7rem;opacity:0.6;';
+    done.textContent = '// Research complete. Report generated from 147+ sources.';
+    output.appendChild(done);
+
+    btn.disabled = false;
+}
+
+/* ─── LIVE DEMO: AI CONTENT ENGINE ───────────────────────── */
+async function runContentDemo() {
+    const input = document.getElementById('content-input').value.trim();
+    const output = document.getElementById('content-output');
+    const btn = document.getElementById('content-btn');
+    if (!input) { output.innerHTML = '<span style="color:#FF4444;">// Please enter a content topic.</span>'; return; }
+
+    btn.disabled = true;
+    output.innerHTML = '<span class="thinking">// AI Content Engine is generating SEO-optimized content structure... 📝</span>';
+
+    await sleep(1000);
+
+    const topic = capitalize(input);
+    const keywords = generateKeywords(input);
+    const sections = [
+        {
+            label: '📰 ARTICLE STRUCTURE',
+            lines: [
+                `Title: "${topic}: The Complete Guide for ${new Date().getFullYear()}"`,
+                `Word count target: 2,500-3,000 words`,
+                `Reading time: ~12-15 minutes`,
+                `Content type: Comprehensive guide with actionable insights`,
+            ]
+        },
+        {
+            label: '📋 OUTLINE',
+            lines: [
+                `H1: ${topic}`,
+                `H2: Introduction to ${topic}`,
+                `H2: Why ${topic} Matters in Today's Landscape`,
+                `H2: Key Benefits and Applications`,
+                `H2: How to Get Started with ${topic}`,
+                `H2: Common Challenges and Solutions`,
+                `H2: Future Trends in ${topic}`,
+                `H2: Conclusion and Next Steps`,
+            ]
+        },
+        {
+            label: '🔍 SEO OPTIMIZATION',
+            lines: [
+                `Primary keyword: ${topic.toLowerCase()}`,
+                `Secondary keywords: ${keywords.secondary.join(', ')}`,
+                `LSI keywords: ${keywords.lsi.join(', ')}`,
+                `Keyword density: 1.5-2% for primary keyword`,
+                `Meta description length: 155 characters`,
+            ]
+        },
+        {
+            label: '⚙️ TECHNICAL SEO',
+            lines: [
+                `Schema: Article, BreadcrumbList, FAQPage`,
+                `URL structure: /${topic.toLowerCase().replace(/\s+/g, '-')}/complete-guide`,
+                `Internal links: 5-7 related articles`,
+                `External links: 3-5 authoritative sources`,
+                `Image alt text: Descriptive, keyword-rich variations`,
+            ]
+        },
+        {
+            label: '📊 CONTENT METADATA',
+            lines: [
+                `Title tag: ${topic} | Complete [${new Date().getFullYear()}] Guide`,
+                `Meta description: Discover everything about ${topic.toLowerCase()}. Learn key strategies, benefits, and practical tips from industry experts.`,
+                `OG title: ${topic}: The Ultimate Guide`,
+                `OG description: Master ${topic.toLowerCase()} with our comprehensive guide covering strategies, tools, and best practices.`,
+                `Twitter card: Summary with large image`,
+            ]
+        },
+    ];
+
+    output.innerHTML = `<div style="color:var(--neon);font-size:0.7rem;letter-spacing:0.2em;margin-bottom:0.75rem;opacity:0.7;">CONTENT BLUEPRINT → ${topic.toUpperCase()}</div>`;
+
+    for (const section of sections) {
+        await sleep(280);
+        const header = document.createElement('div');
+        header.style.cssText = 'color:var(--neon);font-weight:700;margin-top:0.75rem;font-size:0.75rem;animation:line-appear 0.3s ease forwards;';
+        header.textContent = section.label;
+        output.appendChild(header);
+
+        for (const line of section.lines) {
+            await sleep(120);
+            const el = document.createElement('div');
+            el.classList.add('output-line');
+            el.innerHTML = `<span class="arrow">·</span><span style="color:rgba(255,255,255,0.75);">${line}</span>`;
+            output.appendChild(el);
+            output.scrollTop = output.scrollHeight;
+        }
+    }
+
+    await sleep(300);
+    const done = document.createElement('div');
+    done.style.cssText = 'margin-top:0.75rem;color:var(--neon);font-size:0.7rem;opacity:0.6;';
+    done.textContent = '// Content structure complete. 5 sections with full SEO optimization.';
+    output.appendChild(done);
+
+    btn.disabled = false;
+}
+
+function generateKeywords(topic) {
+    const words = topic.toLowerCase().split(/\s+/);
+    return {
+        secondary: [
+            `${topic.toLowerCase()} guide`,
+            `${topic.toLowerCase()} tutorial`,
+            `best ${topic.toLowerCase()} practices`,
+            `how to ${topic.toLowerCase()}`,
+        ],
+        lsi: words.slice(0, 4).map(w => `${w} strategies`)
+    };
+}
+
 /* ─── HELPERS ─────────────────────────────────────────────── */
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
