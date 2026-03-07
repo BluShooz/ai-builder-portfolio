@@ -95,6 +95,196 @@ function type() {
 
 window.addEventListener('load', () => setTimeout(type, 700));
 
+/* ─── COMMAND CENTER TYPING SEQUENCE ──────────────────────── */
+const commandCenter = document.getElementById('command-center');
+const commandLines = [
+    { text: '> Initializing neural interface...', delay: 150 },
+    { text: '> Loading portfolio modules...', delay: 200 },
+    { text: '> AI automation systems: ONLINE', delay: 180 },
+    { text: '> Builder protocol: ACTIVE', delay: 0 }
+];
+
+async function typeCommandLines() {
+    for (let i = 0; i < commandLines.length; i++) {
+        const line = commandLines[i];
+        await sleep(line.delay);
+
+        const lineEl = document.createElement('div');
+        lineEl.className = 'terminal-line';
+        lineEl.innerHTML = `<span class="prompt">▶</span><span>${line.text}</span>`;
+        commandCenter.appendChild(lineEl);
+    }
+
+    // Add cursor blink after last line
+    await sleep(300);
+    const cursorLine = document.createElement('div');
+    cursorLine.className = 'terminal-line';
+    cursorLine.innerHTML = `<span class="prompt">▶</span><span>System ready.</span><span class="cursor"></span>`;
+    commandCenter.appendChild(cursorLine);
+
+    // Start hero typing after command center
+    await sleep(500);
+    typeHeroHeadline();
+}
+
+/* Modified hero typing to start after command center */
+function typeHeroHeadline() {
+    type();
+}
+
+// Override original load handler
+window.removeEventListener('load', () => setTimeout(type, 700));
+window.addEventListener('load', () => setTimeout(typeCommandLines, 700));
+
+/* ─── AI BUILDER BRAIN (CHATBOT) ───────────────────────────── */
+const chatWidget = document.getElementById('chat-widget');
+const chatTrigger = chatWidget.querySelector('.chat-trigger');
+const chatWindow = chatWidget.querySelector('.chat-window');
+const closeBtn = chatWidget.querySelector('.close-btn');
+const chatBody = chatWidget.querySelector('#chat-body');
+const chatInput = chatWidget.querySelector('#chat-input');
+const chatSend = chatWidget.querySelector('#chat-send');
+
+// Toggle chat window
+chatTrigger.addEventListener('click', () => {
+    chatWindow.classList.toggle('active');
+    if (chatWindow.classList.contains('active')) {
+        chatInput.focus();
+        // Hide badge after first open
+        const badge = chatTrigger.querySelector('.chat-badge');
+        if (badge) badge.style.display = 'none';
+    }
+});
+
+closeBtn.addEventListener('click', () => {
+    chatWindow.classList.remove('active');
+});
+
+// Send message handler
+function sendMessage() {
+    const message = chatInput.value.trim();
+    if (!message) return;
+
+    // Add user message
+    addMessage(message, 'user');
+    chatInput.value = '';
+
+    // Show typing indicator
+    showTyping();
+
+    // Process and respond
+    setTimeout(() => {
+        removeTyping();
+        const response = generateResponse(message);
+        addMessage(response, 'bot');
+    }, 800 + Math.random() * 600);
+}
+
+chatSend.addEventListener('click', sendMessage);
+chatInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') sendMessage();
+});
+
+function addMessage(text, type) {
+    const messageEl = document.createElement('div');
+    messageEl.className = `chat-message ${type}`;
+
+    if (type === 'bot') {
+        messageEl.innerHTML = `
+            <div class="message-avatar">AI</div>
+            <div class="message-content">${text}</div>
+        `;
+    } else {
+        messageEl.innerHTML = `<div class="message-content">${text}</div>`;
+    }
+
+    chatBody.appendChild(messageEl);
+    chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+function showTyping() {
+    const typingEl = document.createElement('div');
+    typingEl.className = 'chat-message bot typing';
+    typingEl.id = 'typing-indicator';
+    typingEl.innerHTML = `
+        <div class="message-avatar">AI</div>
+        <div class="message-content"></div>
+    `;
+    chatBody.appendChild(typingEl);
+    chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+function removeTyping() {
+    const typingEl = document.getElementById('typing-indicator');
+    if (typingEl) typingEl.remove();
+}
+
+/* AI Response Generator */
+function generateResponse(input) {
+    const lower = input.toLowerCase();
+
+    // Greetings
+    if (lower.match(/^(hi|hello|hey|greetings|howdy)/)) {
+        return "Hello! I'm the AI Builder assistant. I can tell you about Jonathan's projects, demos, and skills. What would you like to know?";
+    }
+
+    // Featured project - Merchant Risk Analyzer
+    if (lower.includes('merchant') || lower.includes('risk') || lower.includes('analyzer') || lower.includes('fraud')) {
+        return "The <strong>AI Merchant Risk Analyzer</strong> is the featured project! It analyzes merchant data to identify potential risk patterns like chargeback probability, fraud signals, and transaction velocity. It helps payment processors avoid financial exposure. Check out the live demo in the Featured section!";
+    }
+
+    // Projects
+    if (lower.includes('project') || lower.includes('work') || lower.includes('build')) {
+        return "Jonathan has built several AI-powered tools: <strong>AI Workflow Generator</strong> creates automation blueprints, <strong>AI Landing Page Builder</strong> generates page structures instantly, <strong>AI Research Agent</strong> pulls structured research, and <strong>AI Content Engine</strong> produces SEO-optimized content at scale. Scroll to the Projects section to learn more!";
+    }
+
+    // Demos
+    if (lower.includes('demo') || lower.includes('try') || lower.includes('test') || lower.includes('interactive')) {
+        return "You can try two live demos right now! The <strong>Automation Generator</strong> creates workflow blueprints for any business process. The <strong>Landing Page Generator</strong> builds complete page structures from a business description. Both are in the Live Demos section!";
+    }
+
+    // Skills/Tech stack
+    if (lower.includes('skill') || lower.includes('tech') || lower.includes('stack') || lower.includes('language') || lower.includes('experience')) {
+        return "Jonathan works with <strong>Python</strong>, <strong>JavaScript/TypeScript</strong>, <strong>LLM APIs</strong>, <strong>RAG pipelines</strong>, and automation tools like <strong>n8n</strong> and <strong>Zapier</strong>. He specializes in building internal tools and rapid prototypes. Check the Tech Stack section for details!";
+    }
+
+    // Process/How I build
+    if (lower.includes('how') || lower.includes('process') || lower.includes('approach') || lower.includes('methodology')) {
+        return "Jonathan's build process: <strong>1)</strong> Identify operational bottlenecks, <strong>2)</strong> Design the automation workflow, <strong>3)</strong> Rapid prototype to validate, <strong>4)</strong> Deploy and iterate based on real data. The goal is always eliminating manual work!";
+    }
+
+    // Contact
+    if (lower.includes('contact') || lower.includes('email') || lower.includes('hire') || lower.includes('work') || lower.includes('available')) {
+        return "Jonathan is <strong>available for full-time and contract roles</strong>! You can reach him at <strong>3lueshooz@gmail.com</strong>, connect on <strong>GitHub</strong>, or find him on <strong>LinkedIn</strong>. Check the Contact section for all links!";
+    }
+
+    // Lab/Experiments
+    if (lower.includes('lab') || lower.includes('experiment') || lower.includes('prototype') || lower.includes('test')) {
+        return "The <strong>Lab</strong> is where experimental ideas live before becoming full systems. Current experiments include an AI Prompt Laboratory, Automation Chain Builder, and AI Idea Generator. These are prototypes - some fail, and that's the point!";
+    }
+
+    // About/Who
+    if (lower.includes('who') || lower.includes('about') || lower.includes('jonathan') || lower.includes('builder')) {
+        return "Jonathan Smith is an <strong>AI Automation Builder</strong> who specializes in creating AI integrations, internal tools, and rapid prototypes that improve business operations. He eliminates manual work through intelligent automation systems.";
+    }
+
+    // Default response
+    const defaultResponses = [
+        "I can tell you about Jonathan's projects, demos, tech stack, or how to contact him. What specifically interests you?",
+        "Explore the portfolio to see AI-powered automation tools. Would you like details about a specific project or demo?",
+        "Jonathan builds systems that eliminate manual work. Ask about the Risk Analyzer, Workflow Generator, or Landing Page Builder!",
+        "Check out the Live Demos section to try the AI tools yourself. Or ask me about any project!",
+    ];
+    return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
+}
+
+// Initial greeting message
+setTimeout(() => {
+    if (!chatWindow.classList.contains('active')) {
+        // Bot will greet when chat is opened
+    }
+}, 2000);
+
 /* ─── SCROLL REVEALS ──────────────────────────────────────── */
 const revealEls = document.querySelectorAll('.reveal');
 const revealObs = new IntersectionObserver((entries) => {
