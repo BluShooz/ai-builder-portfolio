@@ -1153,3 +1153,168 @@ console.log(
     'color:#00FF41;font-size:14px;font-weight:bold;',
     'color:#ffffff;font-size:11px;opacity:0.7;'
 );
+
+/* ─── SOUND EFFECTS SYSTEM ────────────────────────────────── */
+const SoundEffects = {
+    ctx: null,
+
+    init() {
+        try {
+            this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+        } catch (e) {
+            console.log('Audio context not supported');
+        }
+    },
+
+    play(type) {
+        if (!this.ctx) this.init();
+        if (!this.ctx) return;
+
+        const oscillator = this.ctx.createOscillator();
+        const gainNode = this.ctx.createGain();
+
+        oscillator.connect(gainNode);
+        gainNode.connect(this.ctx.destination);
+
+        switch (type) {
+            case 'hover':
+                oscillator.frequency.setValueAtTime(400, this.ctx.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(600, this.ctx.currentTime + 0.1);
+                gainNode.gain.setValueAtTime(0.05, this.ctx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.1);
+                oscillator.start(this.ctx.currentTime);
+                oscillator.stop(this.ctx.currentTime + 0.1);
+                break;
+            case 'click':
+                oscillator.frequency.setValueAtTime(800, this.ctx.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(400, this.ctx.currentTime + 0.15);
+                gainNode.gain.setValueAtTime(0.1, this.ctx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.15);
+                oscillator.start(this.ctx.currentTime);
+                oscillator.stop(this.ctx.currentTime + 0.15);
+                break;
+            case 'typing':
+                oscillator.frequency.setValueAtTime(800 + Math.random() * 200, this.ctx.currentTime);
+                gainNode.gain.setValueAtTime(0.02, this.ctx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.03);
+                oscillator.start(this.ctx.currentTime);
+                oscillator.stop(this.ctx.currentTime + 0.03);
+                break;
+        }
+    }
+};
+
+// Add sound effects to interactive elements
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize audio context on first interaction
+    const initAudio = () => {
+        SoundEffects.init();
+        document.removeEventListener('click', initAudio);
+        document.removeEventListener('mousemove', initAudio);
+    };
+    document.addEventListener('click', initAudio, { once: true });
+    document.addEventListener('mousemove', initAudio, { once: true });
+
+    // Add hover sounds to buttons and links
+    document.querySelectorAll('.btn, .magnetic, a, .lab-card, .project-card').forEach(el => {
+        el.addEventListener('mouseenter', () => SoundEffects.play('hover'));
+    });
+
+    // Add click sounds to buttons
+    document.querySelectorAll('.btn, .sound-effect').forEach(el => {
+        el.addEventListener('click', () => SoundEffects.play('click'));
+    });
+});
+
+/* ─── TYPING EFFECT FOR SECTION HEADINGS ───────────────────── */
+const typedHeadings = new Set();
+
+function typeHeading(element) {
+    if (typedHeadings.has(element)) return;
+
+    const text = element.textContent;
+    const accent = element.querySelector('.accent');
+    const accentText = accent ? accent.textContent : '';
+
+    element.innerHTML = '';
+    typedHeadings.add(element);
+
+    let charIndex = 0;
+    const isAccent = [];
+
+    // Mark which characters are part of accent
+    if (accent) {
+        const accentStart = text.indexOf(accentText);
+        for (let i = 0; i < text.length; i++) {
+            isAccent.push(i >= accentStart && i < accentStart + accentText.length);
+        }
+    }
+
+    // Add cursor
+    const cursor = document.createElement('span');
+    cursor.className = 'typing-cursor';
+    element.appendChild(cursor);
+
+    function typeChar() {
+        if (charIndex < text.length) {
+            cursor.remove();
+
+            const char = text[charIndex];
+            const span = document.createElement('span');
+            span.textContent = char;
+            if (isAccent[charIndex]) {
+                span.className = 'accent';
+            }
+            element.appendChild(span);
+
+            element.appendChild(cursor);
+            charIndex++;
+
+            if (charIndex % 3 === 0) {
+                SoundEffects.play('typing');
+            }
+
+            setTimeout(typeChar, 30 + Math.random() * 40);
+        } else {
+            cursor.remove();
+        }
+    }
+
+    typeChar();
+}
+
+// Observer for typing effect on headings
+const headingObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            typeHeading(entry.target);
+            headingObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.5 });
+
+// Observe all section headings
+document.querySelectorAll('.section-heading, .featured-title, .contact-headline').forEach(heading => {
+    headingObserver.observe(heading);
+});
+
+/* ─── FLOATING CTA VISIBILITY ───────────────────────────────── */
+const floatingCTA = document.getElementById('floating-cta');
+let ctaVisible = false;
+
+const ctaObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        const heroBottom = entry.boundingClientRect.bottom;
+
+        if (heroBottom < 0 && !ctaVisible) {
+            floatingCTA.classList.add('visible');
+            ctaVisible = true;
+        } else if (heroBottom > 0 && ctaVisible) {
+            floatingCTA.classList.remove('visible');
+            ctaVisible = false;
+        }
+    });
+}, { threshold: [0, 1] });
+
+const heroSection = document.getElementById('hero');
+if (heroSection) ctaObserver.observe(heroSection);

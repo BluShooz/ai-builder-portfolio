@@ -817,6 +817,79 @@ img {
     animation: float-1 7s ease-in-out infinite reverse;
 }
 
+/* Enhanced Particle Effects */
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--neon);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.6;
+    animation: particle-float linear infinite;
+}
+
+.particle:nth-child(5) { left: 10%; top: 20%; animation-duration: 15s; animation-delay: 0s; }
+.particle:nth-child(6) { left: 25%; top: 60%; animation-duration: 20s; animation-delay: -2s; }
+.particle:nth-child(7) { left: 40%; top: 30%; animation-duration: 18s; animation-delay: -4s; }
+.particle:nth-child(8) { left: 60%; top: 70%; animation-duration: 22s; animation-delay: -6s; }
+.particle:nth-child(9) { left: 75%; top: 40%; animation-duration: 16s; animation-delay: -8s; }
+.particle:nth-child(10) { left: 85%; top: 55%; animation-duration: 19s; animation-delay: -10s; }
+.particle:nth-child(11) { left: 15%; top: 80%; animation-duration: 17s; animation-delay: -12s; }
+.particle:nth-child(12) { left: 50%; top: 15%; animation-duration: 21s; animation-delay: -14s; }
+.particle:nth-child(13) { left: 70%; top: 85%; animation-duration: 14s; animation-delay: -16s; }
+.particle:nth-child(14) { left: 30%; top: 45%; animation-duration: 23s; animation-delay: -18s; }
+.particle:nth-child(15) { left: 90%; top: 25%; animation-duration: 15s; animation-delay: -20s; }
+
+@keyframes particle-float {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+    }
+    90% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate(var(--tx, 100px), var(--ty, -100px)) scale(0.5);
+        opacity: 0;
+    }
+}
+
+/* Grid particles */
+.grid-particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: var(--neon);
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+    animation: grid-particle-pulse 3s ease-in-out infinite;
+}
+
+.grid-particle:nth-child(16) { left: 20%; top: 25%; animation-delay: 0s; }
+.grid-particle:nth-child(17) { left: 45%; top: 65%; animation-delay: 0.5s; }
+.grid-particle:nth-child(18) { left: 70%; top: 35%; animation-delay: 1s; }
+.grid-particle:nth-child(19) { left: 30%; top: 75%; animation-delay: 1.5s; }
+.grid-particle:nth-child(20) { left: 80%; top: 50%; animation-delay: 2s; }
+.grid-particle:nth-child(21) { left: 55%; top: 20%; animation-delay: 2.5s; }
+
+@keyframes grid-particle-pulse {
+    0%, 100% {
+        opacity: 0;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.5);
+        box-shadow: 0 0 10px var(--neon);
+    }
+}
+
 @keyframes float-1 {
 
     0%,
@@ -1728,6 +1801,73 @@ footer {
     50% {
         opacity: 0.6;
     }
+}
+
+/* ─── FLOATING HIRE ME CTA ─────────────────────────────────── */
+#floating-cta {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    z-index: 999;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s var(--ease-out);
+    pointer-events: none;
+}
+
+#floating-cta.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+}
+
+#floating-cta .cta-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--neon);
+    color: var(--black);
+    padding: 0.85rem 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 0 30px rgba(0, 255, 65, 0.4);
+    transition: all 0.3s var(--ease-out);
+    animation: cta-pulse 2s ease-in-out infinite;
+}
+
+#floating-cta .cta-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 40px rgba(0, 255, 65, 0.6);
+}
+
+@keyframes cta-pulse {
+    0%, 100% {
+        box-shadow: 0 0 30px rgba(0, 255, 65, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(0, 255, 65, 0.6);
+    }
+}
+
+/* Typing cursor for section headings */
+.typing-cursor {
+    display: inline-block;
+    width: 3px;
+    height: 1em;
+    background: var(--neon);
+    margin-left: 4px;
+    animation: typing-cursor-blink 0.8s step-end infinite;
+    vertical-align: text-bottom;
+}
+
+@keyframes typing-cursor-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
 }
 
 /* Lab Modal Styles */
