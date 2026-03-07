@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Jonathan Smith — AI Automation Builder. Specializing in AI integrations, internal tools, and rapid prototypes that improve business operations." />
+    <title>Jonathan Smith — AI Automation Builder</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23000'/><text y='.9em' font-size='90' fill='%2300FF41'>▋</text></svg>">
+</head>
+
+<body>
+
+    <!-- PAGE WIPE -->
+    <div id="wipe"></div>
+
+    <!-- CUSTOM CURSOR -->
+    <div id="cursor"></div>
+    <div id="cursor-trail"></div>
+
+    <!-- ═══════════════════════════════════════════
+       HERO
+  ════════════════════════════════════════════ -->
+    <section id="hero">
+        <!-- Floating Shapes -->
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
+
+        <div class="container hero-inner">
+            <div class="hero-badge">
+                <span class="dot"></span>
+                <span>Available for work</span>
+            </div>
+
+            <h1 class="hero-headline" id="hero-headline" aria-label="AI Automation Builder">
+                <span id="typed-text"></span><span class="cursor-blink"></span>
+            </h1>
+
+            <p class="hero-sub">
+                Specializing in AI integrations, internal tools, and rapid prototypes that improve business operations.
+            </p>
+
+            <nav class="hero-buttons" aria-label="Navigation">
+                <a href="#projects" class="btn primary magnetic">
+                    <span>Projects</span>
+                </a>
+                <a href="#demos" class="btn magnetic">
+                    <span>Live Demos</span>
+                </a>
+                <a href="#experiments" class="btn magnetic">
+                    <span>Experiments</span>
+                </a>
+                <a href="https://github.com/BluShooz" target="_blank" rel="noopener" class="btn ghost magnetic">
+                    <span>GitHub ↗</span>
+                </a>
+                <a href="#contact" class="btn ghost magnetic">
+                    <span>Contact</span>
+                </a>
+            </nav>
+
+            <!-- Scroll indicator -->
+            <div
+                style="position:absolute;bottom:3rem;left:2rem;opacity:0.3;font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;font-family:var(--font-mono);display:flex;align-items:center;gap:0.75rem;">
+                <span style="display:inline-block;width:30px;height:1px;background:var(--neon);"></span>
+                Scroll to explore
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+       FEATURED PROJECT
+  ════════════════════════════════════════════ -->
+    <section id="featured">
+        <div class="container reveal">
+            <div class="section-label">Featured Project</div>
+
+            <div class="featured-inner">
+                <div class="featured-content">
+                    <span class="featured-tag">⚡ Primary Build</span>
+                    <h2 class="featured-title">AI Merchant<br>Risk<br>Analyzer</h2>
+                    <p class="featured-desc">
+                        Payment processors deal with risky merchants, fraud attempts, and chargeback abuse. This AI
+                        system analyzes merchant data and identifies potential risk patterns before approval or
+                        processing — saving processors from significant financial exposure.
+                    </p>
+
+                    <div class="featured-label">Problem Solved</div>
+                    <p class="featured-desc" style="margin-bottom:1.5rem;">Manual merchant review is slow, inconsistent,
+                        and expensive. My system automates the entire risk assessment pipeline in real-time.</p>
+
+                    <div class="featured-label">Core Features</div>
+                    <ul class="featured-features">
+                        <li>Merchant risk scoring engine</li>
+                        <li>Transaction pattern detection</li>
+                        <li>Chargeback prediction model</li>
+                        <li>Fraud signal detection</li>
+                        <li>Real-time approval recommendations</li>
+                    </ul>
+
+                    <div class="tech-stack">
+                        <span class="tech-tag neon-tag">Python</span>
+                        <span class="tech-tag neon-tag">LLM API</span>
+                        <span class="tech-tag">Automation</span>
+                        <span class="tech-tag">ML Pipeline</span>
+                        <span class="tech-tag">REST API</span>
+                    </div>
+
+                    <a href="#demos" class="btn primary magnetic" style="margin-top:1rem;">
+                        <span>→ View Live Demo</span>
+                    </a>
+                </div>
+
+                <!-- Animated Risk Visual -->
+                <div class="featured-visual" id="risk-visual" aria-label="AI Risk Analyzer visualization">
+                    <div class="risk-bar-group">
+                        <div class="risk-label">
+                            <span>Chargeback Probability</span>
+                            <span id="cb-pct">0%</span>
+                        </div>
+                        <div class="risk-bar">
+                            <div class="risk-bar-fill" id="cb-bar" data-target="72"></div>
+                        </div>
+                    </div>
+                    <div class="risk-bar-group">
+                        <div class="risk-label">
+                            <span>Fraud Signal Score</span>
+                            <span id="fs-pct">0%</span>
+                        </div>
+                        <div class="risk-bar">
+                            <div class="risk-bar-fill" id="fs-bar" data-target="45"></div>
+                        </div>
+                    </div>
+                    <div class="risk-bar-group">
+                        <div class="risk-label">
+                            <span>Transaction Velocity</span>
+                            <span id="tv-pct">0%</span>
+                        </div>
+                        <div class="risk-bar">
+                            <div class="risk-bar-fill" id="tv-bar" data-target="88"></div>
+                        </div>
+                    </div>
+                    <div class="risk-bar-group">
+                        <div class="risk-label">
+                            <span>Pattern Deviation</span>
+                            <span id="pd-pct">0%</span>
+                        </div>
+                        <div class="risk-bar">
+                            <div class="risk-bar-fill" id="pd-bar" data-target="61"></div>
+                        </div>
+                    </div>
+
+                    <div class="risk-score">
+                        <div class="score-val" id="score-val">—</div>
+                        <div class="score-label">Overall Risk Score / 100</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+       PROJECTS
+  ════════════════════════════════════════════ -->
+    <section id="projects">
+        <div class="container">
+            <div class="section-label reveal">Selected Work</div>
+            <h2 class="section-heading reveal">Projects &<br><span class="accent">Builds</span></h2>
+
+            <div class="projects-grid reveal">
+
+                <article class="project-card magnetic">
+                    <div class="project-num">01 / 04</div>
+                    <h3 class="project-title">AI Workflow<br>Generator</h3>
+                    <p class="project-desc">Generates complete automation workflows for business operations. Input a
+                        business process, get a full step-by-step automation blueprint with integrations mapped out.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag neon-tag">Python</span>
+                        <span class="tech-tag neon-tag">LLM API</span>
+                        <span class="tech-tag">n8n</span>
+                        <span class="tech-tag">REST</span>
+                    </div>
+                    <a href="#demos" class="btn" style="font-size:0.7rem;padding:0.6rem 1.25rem;">
+                        <span>View Demo →</span>
+                    </a>
+                </article>
+
+                <article class="project-card magnetic">
+                    <div class="project-num">02 / 04</div>
+                    <h3 class="project-title">AI Landing Page<br>Builder</h3>
+                    <p class="project-desc">Creates complete landing page structures and copy instantly. Generates hero
+                        sections, service listings, CTAs, and SEO content from a single business description.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag neon-tag">JavaScript</span>
+                        <span class="tech-tag neon-tag">LLM API</span>
+                        <span class="tech-tag">SEO</span>
+                        <span class="tech-tag">Copywriting AI</span>
+                    </div>
+                    <a href="#demos" class="btn" style="font-size:0.7rem;padding:0.6rem 1.25rem;">
+                        <span>View Demo →</span>
+                    </a>
+                </article>
+
+                <article class="project-card magnetic">
+                    <div class="project-num">03 / 04</div>
+                    <h3 class="project-title">AI Research<br>Agent</h3>
+                    <p class="project-desc">Pulls structured research summaries and insights from multiple sources.
+                        Delivers formatted intelligence reports on any topic in seconds instead of hours.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag neon-tag">Python</span>
+                        <span class="tech-tag neon-tag">LLM API</span>
+                        <span class="tech-tag">Web Scraping</span>
+                        <span class="tech-tag">RAG</span>
+                    </div>
+                    <a href="https://github.com/BluShooz" target="_blank" rel="noopener" class="btn"
+                        style="font-size:0.7rem;padding:0.6rem 1.25rem;">
+                        <span>GitHub ↗</span>
+                    </a>
+                </article>
+
+                <article class="project-card magnetic">
+                    <div class="project-num">04 / 04</div>
+                    <h3 class="project-title">AI Content<br>Engine</h3>
+                    <p class="project-desc">Generates SEO-optimized articles and structured content at scale. Handles
+                        keyword targeting, schema markup, internal linking suggestions, and meta data automatically.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag neon-tag">Python</span>
+                        <span class="tech-tag neon-tag">LLM API</span>
+                        <span class="tech-tag">SEO</span>
+                        <span class="tech-tag">CMS Integration</span>
+                    </div>
+                    <a href="https://github.com/BluShooz" target="_blank" rel="noopener" class="btn"
+                        style="font-size:0.7rem;padding:0.6rem 1.25rem;">
+                        <span>GitHub ↗</span>
+                    </a>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+       EXPERIMENTS — LAB
+  ════════════════════════════════════════════ -->
+    <section id="experiments">
+        <div class="container">
+            <div class="lab-header reveal">
+                <div>
+                    <div class="section-label">Experimental</div>
+                    <h2 class="section-heading" style="margin-bottom:0;">Lab /<br><span
+                            class="accent">Experiments</span></h2>
+                </div>
+                <p style="max-width:340px;opacity:0.5;font-size:0.8rem;line-height:1.7;align-self:flex-end;">
+                    Prototype space. Ideas tested here before they become full systems. Some fail. That's the point.
+                </p>
+            </div>
+
+            <div class="lab-grid reveal">
+                <article class="lab-card" data-index="01">
+                    <span class="lab-icon" aria-hidden="true">⚗️</span>
+                    <h3 class="lab-title">AI Prompt Laboratory</h3>
+                    <p class="lab-desc">Experiment with prompt engineering techniques. Test chain-of-thought, few-shot,
+                        zero-shot, and structured output patterns against multiple LLM backends.</p>
+                    <span class="lab-status">Active Experiment</span>
+                </article>
+
+                <article class="lab-card" data-index="02">
+                    <span class="lab-icon" aria-hidden="true">🔗</span>
+                    <h3 class="lab-title">Automation Chain Builder</h3>
+                    <p class="lab-desc">Visualize automation pipelines and task flows. Drag-and-drop interface for
+                        mapping multi-step AI agent chains with conditional logic and error handling.</p>
+                    <span class="lab-status">In Development</span>
+                </article>
+
+                <article class="lab-card" data-index="03">
+                    <span class="lab-icon" aria-hidden="true">💡</span>
+                    <h3 class="lab-title">AI Idea Generator</h3>
+                    <p class="lab-desc">Generates startup ideas and product concepts from market gaps. Combines trend
+                        data, competitor analysis, and ICP profiling to surface high-signal opportunities.</p>
+                    <span class="lab-status">Prototyping</span>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+       LIVE DEMOS
+  ════════════════════════════════════════════ -->
+    <section id="demos">
+        <div class="container">
+            <div class="section-label reveal">Interactive</div>
+            <h2 class="section-heading reveal">Live <span class="accent">Demos</span></h2>
+            <p class="reveal"
+                style="max-width:500px;opacity:0.5;font-size:0.85rem;line-height:1.7;margin-top:-2rem;margin-bottom:0;">
+                Try the tools directly. Enter a real business scenario and watch the AI output the system structure.
+            </p>
+
+            <div class="demos-grid">
+
+                <!-- Demo 1: Automation Generator -->
+                <div class="demo-card reveal">
+                    <div class="demo-header">
+                        <div class="demo-dots">
+                            <div class="demo-dot"></div>
+                            <div class="demo-dot"></div>
+                            <div class="demo-dot"></div>
+                        </div>
+                        <span style="margin-left:0.5rem;">AUTOMATION_GENERATOR.exe</span>
+                    </div>
+                    <div class="demo-body">
+                        <label class="demo-input-label" for="auto-input">Describe the business process to
+                            automate:</label>
+                        <textarea id="auto-input" class="demo-textarea"
+                            placeholder="e.g. Automate a barbershop booking system"
+                            aria-label="Business process input for Automation Generator"></textarea>
+                        <button class="btn primary magnetic" id="auto-btn"
+                            style="margin-top:0.75rem;width:100%;justify-content:center;" onclick="runAutomationDemo()">
+                            <span>⚡ Generate Workflow</span>
+                        </button>
+                        <div class="demo-output" id="auto-output" aria-live="polite">
+                            <span style="opacity:0.3;font-size:0.75rem;">// Output appears here...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Demo 2: Landing Page Generator -->
+                <div class="demo-card reveal">
+                    <div class="demo-header">
+                        <div class="demo-dots">
+                            <div class="demo-dot"></div>
+                            <div class="demo-dot"></div>
+                            <div class="demo-dot"></div>
+                        </div>
+                        <span style="margin-left:0.5rem;">LANDING_PAGE_GEN.exe</span>
+                    </div>
+                    <div class="demo-body">
+                        <label class="demo-input-label" for="page-input">Describe the business for your landing
+                            page:</label>
+                        <textarea id="page-input" class="demo-textarea" placeholder="e.g. Barbershop in Dallas"
+                            aria-label="Business description for Landing Page Generator"></textarea>
+                        <button class="btn primary magnetic" id="page-btn"
+                            style="margin-top:0.75rem;width:100%;justify-content:center;"
+                            onclick="runLandingPageDemo()">
+                            <span>🚀 Generate Page Structure</span>
+                        </button>
+                        <div class="demo-output" id="page-output" aria-live="polite">
+                            <span style="opacity:0.3;font-size:0.75rem;">// Output appears here...</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+       HOW I BUILD
+  ════════════════════════════════════════════ -->
+    <section id="how">
+        <div class="container">
+            <div class="section-label reveal">Process</div>
+            <h2 class="section-heading reveal">How I <span class="accent">Build</span></h2>
+
+            <div class="steps-grid reveal">
+                <div class="step-item">
+                    <div class="step-num">01</div>
+                    <div class="step-title">Identify Bottlenecks</div>
+                    <p class="step-desc">Map the operational pain points. Find where manual work kills speed, accuracy,
+                        or scale.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">02</div>
+                    <div class="step-title">Design Workflow</div>
+                    <p class="step-desc">Architect the automation logic. Define triggers, data flows, integrations, and
+                        fallback states.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">03</div>
+                    <div class="step-title">Rapid Prototype</div>
+                    <p class="step-desc">Build a working version fast. Ship something testable before perfecting —
+                        validate, then refine.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">04</div>
+                    <div class="step-title">Deploy & Iterate</div>
+                    <p class="step-desc">Push to production. Monitor performance, gather real data, and continuously
+                        improve the system.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+       TECH STACK
+  ════════════════════════════════════════════ -->
+    <section id="tech">
+        <div class="container">
+            <div class="section-label reveal">Stack</div>
+            <h2 class="section-heading reveal">Tech <span class="accent">Stack</span></h2>
+
+            <div class="tech-inner reveal">
+                <div>
+                    <div class="tech-group-title">Languages</div>
+                    <ul class="tech-list">
+                        <li>Python</li>
+                        <li>JavaScript</li>
+                        <li>TypeScript</li>
+                        <li>Bash / Shell</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="tech-group-title">AI & Automation</div>
+                    <ul class="tech-list">
+                        <li>LLM APIs</li>
+                        <li>Prompt Engineering</li>
+                        <li>RAG Pipelines</li>
+                        <li>AI Agent Frameworks</li>
+                        <li>n8n / Zapier</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="tech-group-title">Infrastructure</div>
+                    <ul class="tech-list">
+                        <li>REST API Design</li>
+                        <li>Cloud Deployments</li>
+                        <li>Supabase / PostgreSQL</li>
+                        <li>Vercel / Railway</li>
+                        <li>GitHub Actions</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+       CONTACT
+  ════════════════════════════════════════════ -->
+    <section id="contact">
+        <div class="container reveal">
+            <span class="contact-tag">Open to Opportunities</span>
+            <h2 class="contact-headline">Want to Build<br><span class="accent">Something?</span></h2>
+            <p class="contact-sub">Let's eliminate the manual work in your business.</p>
+
+            <div class="contact-links">
+                <a href="mailto:3lueshooz@gmail.com" class="btn primary magnetic">
+                    <span>✉ 3lueshooz@gmail.com</span>
+                </a>
+                <a href="https://github.com/BluShooz" target="_blank" rel="noopener" class="btn magnetic">
+                    <span>GitHub ↗</span>
+                </a>
+                <a href="https://www.linkedin.com/in/jonathan-smith-46083211a/" target="_blank" rel="noopener" class="btn ghost magnetic">
+                    <span>LinkedIn ↗</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="container">
+            <footer>
+                <span>© 2026 Jonathan Smith — AI Automation Builder</span>
+                <span style="font-family:var(--font-mono);">Built with <span style="color:var(--neon);">▋</span> and
+                    obsession</span>
+                <span>Available for full-time / contract</span>
+            </footer>
+        </div>
+    </section>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
