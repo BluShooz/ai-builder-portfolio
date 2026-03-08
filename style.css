@@ -1584,7 +1584,7 @@ img {
     opacity: 0.25;
     margin-bottom: 1rem;
     letter-spacing: -0.04em;
-    color: var(--neon);
+    color: var(--white);
 }
 
 .step-title {
